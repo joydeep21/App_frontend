@@ -16,7 +16,9 @@ Coded by www.creative-tim.com
 import { useState } from "react";
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+// import withReactContent from "sweetalert2-react-content";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -38,8 +40,54 @@ import curved6 from "assets/images/curved-images/curved6.jpg";
 
 function Basic() {
   const [agreement, setAgremment] = useState(true);
+  const toastId = React.useRef(null);
+  const MySwal = withReactContent(Swal);
+  const [userAccess, setUserAccess] = useState("");
+  const [userID, setUserID] = useState("");
+  const navigate = useNavigate();
+  const [loader, setLoader] = useState(false);
 
   const handleSetAgremment = () => setAgremment(!agreement);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    let userid = document.getElementById("userid").value;
+    let password = document.getElementById("password").value;
+    if (name == "" || userid == "" || email == "" || password == "") {
+      if (!toast.isActive(toastId.current)) {
+        toastId.current = toast.warning("Mandatory field(s) missing!");
+      }
+    } else {
+      const data = {
+        action: "userRegistration",
+        name: name,
+        userid: userid,
+        email: email,
+        password: password,
+      };
+
+      authUserRegistration(JSON.stringify(data))
+        .then(
+          function (response) {
+            var res = response.data;
+            console.log(res);
+            if (res.status == "true" && res.code == "200") {
+              MySwal.fire({
+                title: <strong>Success</strong>,
+                html: <i>User Created successfully!</i>,
+                icon: "success",
+              }).then(() => {
+                window.location.reload();
+              });
+            } else {
+            }
+          }.bind(this)
+        )
+        .catch(function (error) {
+          setLoader(false);
+          console.log(error);
+        });
+    }
+  };
 
   return (
     <BasicLayout
@@ -48,20 +96,9 @@ function Basic() {
       image={curved6}
     >
       <Card>
-        <SoftBox p={3} mb={1} textAlign="center">
-          <SoftTypography variant="h5" fontWeight="medium">
-            Register with
-          </SoftTypography>
-        </SoftBox>
-        <SoftBox mb={2}>
-          <Socials />
-        </SoftBox>
-        <Separator />
         <SoftBox pt={2} pb={3} px={3}>
           <SoftBox component="form" role="form">
-            <SoftBox mb={2}>
-              <SoftInput placeholder="Name" />
-            </SoftBox>
+          <form noValidate onSubmit={handleSubmit}>
             <SoftBox mb={2}>
               <SoftInput type="email" placeholder="Email" />
             </SoftBox>
@@ -108,6 +145,7 @@ function Basic() {
                 </SoftTypography>
               </SoftTypography>
             </SoftBox>
+            </form>
           </SoftBox>
         </SoftBox>
       </Card>
