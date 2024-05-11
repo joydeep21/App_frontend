@@ -70,7 +70,7 @@ function Banner() {
  
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("user details");
+    console.log("user details checking changes");
     // let userid = document.getElementById("userid").value;
     // let password = document.getElementById("password").value;
     if (event == "" || offers == "" ||appName==""||!selectedFile) {
