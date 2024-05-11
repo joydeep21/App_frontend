@@ -37,7 +37,7 @@ function SidenavCard() {
   return (
     <Card sx={(theme) => card(theme, { miniSidenav })}>
       <CardContent sx={(theme) => cardContent(theme, { sidenavColor })}>
-        <SoftBox
+        {/* <SoftBox
           bgColor="white"
           width="2rem"
           height="2rem"
@@ -49,8 +49,8 @@ function SidenavCard() {
           <Icon fontSize="medium" sx={(theme) => cardIcon(theme, { sidenavColor })}>
             star
           </Icon>
-        </SoftBox>
-        <SoftBox lineHeight={1}>
+        </SoftBox> */}
+        {/* <SoftBox lineHeight={1}>
           <SoftTypography variant="h6" color="white">
             Need help?
           </SoftTypography>
@@ -70,7 +70,7 @@ function SidenavCard() {
           >
             documentation
           </SoftButton>
-        </SoftBox>
+        </SoftBox> */}
       </CardContent>
     </Card>
   );

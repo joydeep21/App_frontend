@@ -110,7 +110,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
       onClose={handleCloseMenu}
       sx={{ mt: 2 }}
     >
-      <NotificationItem
+      {/* <NotificationItem
         image={<img src={team2} alt="person" />}
         title={["New message", "from Laur"]}
         date="13 minutes ago"
@@ -132,7 +132,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
         title={["", "Payment successfully completed"]}
         date="2 days"
         onClick={handleCloseMenu}
-      />
+      /> */}
     </Menu>
   );
 
@@ -151,13 +151,13 @@ function DashboardNavbar({ absolute, light, isMini }) {
         </SoftBox>
         {isMini ? null : (
           <SoftBox sx={(theme) => navbarRow(theme, { isMini })}>
-            <SoftBox pr={1}>
+            {/* <SoftBox pr={1}>
               <SoftInput
                 placeholder="Type here..."
                 icon={{ component: "search", direction: "left" }}
               />
-            </SoftBox>
-            <SoftBox color={light ? "white" : "inherit"}>
+            </SoftBox> */}
+            {/* <SoftBox color={light ? "white" : "inherit"}>
               <Link to="/authentication/sign-in/basic">
                 <IconButton sx={navbarIconButton} size="small">
                   <Icon
@@ -206,7 +206,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 <Icon className={light ? "text-white" : "text-dark"}>notifications</Icon>
               </IconButton>
               {renderMenu()}
-            </SoftBox>
+            </SoftBox> */}
           </SoftBox>
         )}
       </Toolbar>

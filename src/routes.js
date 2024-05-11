@@ -77,8 +77,10 @@ import SignInBasic from "layouts/authentication/sign-in/basic";
 import SignInCover from "layouts/authentication/sign-in/cover";
 import SignInIllustration from "layouts/authentication/sign-in/illustration";
 import SignUpBasic from "layouts/pages/SignUP";
-import AddAccount from "layouts/pages/userAction/addAccount";
-import Transation from "layouts/pages/userAction/transation";
+import AddAccount from "layouts/pages/userAction/addAccount.js";
+import Transation from "layouts/pages/userAction/transation.js";
+import AppLogo from "layouts/pages/uploader/applogo.js";
+import Banner from "layouts/pages/uploader/banner.js";
 import SignUpCover from "layouts/authentication/sign-up/cover";
 import SignUpIllustration from "layouts/authentication/sign-up/illustration";
 import ResetBasic from "layouts/authentication/reset-password/basic";
@@ -112,16 +114,16 @@ const routes = [
     icon: <Shop size="12px" />,
     collapse: [
       {
-        name: "Default",
-        key: "default",
-        route: "/dashboards/default",
-        component: <Default />,
+        name: "Banner",
+        key: "banner",
+        route: "/Uploader/banner",
+        component: <Banner />,
       },
       {
-        name: "Automotive",
+        name: "App Logo",
         key: "automotive",
-        route: "/dashboards/automotive",
-        component: <Automotive />,
+        route: "/Uploader/appLogo",
+        component: <AppLogo />,
       }
     ],
   },
@@ -140,7 +142,7 @@ const routes = [
         component: <AddAccount />,
       },
       {
-        name: "Treansation",
+        name: "Transation",
         key: "transation",
         route: "/user-Actions/transation",
         component: <Transation />,
@@ -156,19 +158,16 @@ const routes = [
     key: "authentication",
     icon: <Document size="12px" />,
     collapse: [
-  {
-    name: "Sign Up",
-    key: "sign-up",
-    collapse: [
+  
       {
-        name: "Basic",
-        key: "basic",
-        route: "/authentication/sign-up/basic",
+        name: "Sign Up",
+        key: "sign-up",
+        route: "/",
         component: <SignUpBasic />,
         noCollapse: false,
       }
     ],
-  }]
+  
 },
 ];
 

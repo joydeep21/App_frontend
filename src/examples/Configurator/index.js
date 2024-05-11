@@ -212,7 +212,7 @@ function Configurator() {
 
         <Divider />
 
-        <SoftBox mt={3} mb={2}>
+        {/* <SoftBox mt={3} mb={2}>
           <SoftBox mb={2}>
             <SoftButton
               component={Link}
@@ -292,7 +292,7 @@ function Configurator() {
               &nbsp; Share
             </SoftButton>
           </SoftBox>
-        </SoftBox>
+        </SoftBox> */}
       </SoftBox>
     </ConfiguratorRoot>
   );

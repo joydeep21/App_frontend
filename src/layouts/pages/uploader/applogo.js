@@ -46,37 +46,44 @@ import Footer from "examples/Footer";
 
 // Images
 import curved6 from "assets/images/curved-images/curved6.jpg";
-import { transfar } from "assets/globalAPI";
+import { appLogo } from "assets/globalAPI";
 import { Mp } from "@mui/icons-material";
 
-function Transation() {
+function AppLogo() {
   const [agreement, setAgremment] = useState(true);
   const toastId = useRef(null);
   const MySwal = withReactContent(Swal);
-  const [message, setMessage] = useState("");
-  const [reciveraccount, setReciveraccount] = useState("");
-  const [senderaccount, setSenderaccount] = useState("");
-  const [mpin, setMpin] = useState("");
-  const [amount, setAmmount] = useState("");
+  const [name, setName] = useState('');
+  const [rating, setRating] = useState('');
+  const [downloads, setDownloads] = useState('');
+  const [size, setSize] = useState('');
+  const [reviews, setReviews] = useState('');
+  const [description, setDescription] = useState('');
+  const [types, setTypes] = useState('');
+  const [owner, setOwner] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
-
+  
   const handleSetAgremment = () => setAgremment(!agreement);
-  const handleUsernameChange = (event) => {
-
-    setUserId(event.target.value);
-
+  const handleTypeChange = (event) => {
+    
+    var stringArray = event.target.value.split(',');
+    setTypes(stringArray);
   };
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
 
+ 
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
   };
+
+ 
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("user details");
     // let userid = document.getElementById("userid").value;
     // let password = document.getElementById("password").value;
-    if (reciveraccount == "" || senderaccount == "" ||amount==""|| mpin=="") {
+    if (name == "" || rating == "" ||downloads==""||!selectedFile) {
     console.log("user details");
     Swal.fire({
       icon: 'error',
@@ -87,50 +94,46 @@ function Transation() {
 
       
     } else {
-      const data = {
-        senderAccountNumber:senderaccount,
-        receiverAccountNumber:reciveraccount,
-        amount:amount,
-        mpin:mpin,
-        message:message
-        
-      };
+        const formData = new FormData();
+        formData.append('logo_files', selectedFile);
+        formData.append('name', name);
+        formData.append('rating', rating);
+        formData.append('downloads', downloads);
+        formData.append('reviews', reviews);
+        formData.append('description', description);
+        formData.append('types', types);
+        formData.append('owner', owner);
+
+        // name,rating,downloads,size,reviews,description,types,owner
       try {
-        console.log("hiiii------------>>>", data);
-        const resp = await transfar(data);
-        console.log("hiiii------------>>>", resp);
+        console.log("hiiii------------>>>", formData);
+        const resp = await appLogo(formData);
         const res = resp.data;
         if (resp.status == 200) {
        
-
           Swal.fire({
             icon: 'success',
             title: " succesfully Added",
-            // text: res.message,
+            text: res.message,
             showConfirmButton: false,
             timer: 1500
           });
-          setAmmount("");
-          setMessage("");
-          setReciveraccount("");
-          setSenderaccount("");
-          setMpin("");
-          console.log("Data posted successfully===>>>>", data);
-          // navigate("/dashboards/default")
+          console.log("Data posted successfully===>>>>");
+        //   navigate("/dashboards/default")
         } else {
           Swal.fire({
             icon: 'error',
             title: ' failed!',
-            // text: res.message,
+            text: res.message,
             confirmButtonText: 'OK'
           });
         }
       } catch (err) {
-        console.log(err,"hcdxfvcgcg");
+        console.log("ihgvhvvv",err);
         Swal.fire({
           icon: 'error',
           title: ' failed!',
-          // text: res.message,
+        //   text: res.message,
           confirmButtonText: 'OK'
         });
       }
@@ -167,27 +170,40 @@ function Transation() {
     <DashboardNavbar />
       <Card>
         <SoftBox pt={2} pb={3} px={3}>
-        <SoftTypography>Send Ammount</SoftTypography>
+        <SoftTypography>ADD APP</SoftTypography>
           {/* <SoftBox component="form" role="form"> */}
           <form onSubmit={handleSubmit}>
+           
             <SoftBox mb={2}>
-              <SoftInput type="text" value={senderaccount} placeholder="SenderAccountNumber" onChange={(event)=>setSenderaccount(event.target.value)} />
+              <SoftInput type="text" value={name} placeholder="App Name" onChange={(event)=> setName(event.target.value) } />
             </SoftBox>
             <SoftBox mb={2}>
-              <SoftInput type="text" value={reciveraccount} placeholder="ReceiverAccountNumber" onChange={(event)=> setReciveraccount(event.target.value) } />
+              <SoftInput type="text" value={rating} placeholder="Rating" onChange={(event)=> setRating(event.target.value)}/>
             </SoftBox>
             <SoftBox mb={2}>
-              <SoftInput type="number" value={amount} placeholder="Amount" onChange={(event)=> setAmmount(event.target.value)}/>
+              <SoftInput type="text" value={downloads} placeholder="Downlods"onChange={(event)=> setDownloads(event.target.value)} />
             </SoftBox>
             <SoftBox mb={2}>
-              <SoftInput type="password" value={mpin} placeholder="Mpin"onChange={(event)=> setMpin(event.target.value)} />
+              <SoftInput type="text" value={size} placeholder="App Size" onChange={(event)=>setSize(event.target.value)} />
+            </SoftBox>
+             <SoftBox mb={2}>
+              <SoftInput type="text" value={reviews} placeholder="Reviews" onChange={(event)=>setReviews(event.target.value)} />
+            </SoftBox>
+             <SoftBox mb={2}>
+              <SoftInput type="text" value={description} placeholder="Description" onChange={(event)=>setDescription(event.target.value)} />
+            </SoftBox> 
+            <SoftBox mb={2}>
+              <SoftInput type="text" value={types} placeholder="Types" onChange={handleTypeChange} />
+            </SoftBox>
+             <SoftBox mb={2}>
+              <SoftInput type="text" value={owner} placeholder="App Owner" onChange={(event)=>setOwner(event.target.value)} />
             </SoftBox>
             <SoftBox mb={2}>
-              <SoftInput type="text" value={message} placeholder="Message"onChange={(event)=> setMessage(event.target.value)} />
+              <SoftInput type="file"  placeholder="Select a File"onChange={handleFileChange} />
             </SoftBox>
             <SoftBox mt={5} mb={1}>
               <SoftButton type="submit" variant="gradient" color="dark" fullWidth>
-                Send Money
+                ADD APP
               </SoftButton>
             </SoftBox>
             {/* <SoftBox mt={3} textAlign="center">
@@ -216,4 +232,4 @@ function Transation() {
 
 
 
-export default Transation;
+export default AppLogo;

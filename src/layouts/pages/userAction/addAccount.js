@@ -97,9 +97,7 @@ function AddAccount() {
         const resp = await addAccount(data);
         const res = resp.data;
         if (resp.status == 200) {
-          const token = res.token;
-          // Save token to local storage
-          localStorage.setItem('token', token);
+         
           Swal.fire({
             icon: 'success',
             title: " succesfully Added",
@@ -107,8 +105,12 @@ function AddAccount() {
             showConfirmButton: false,
             timer: 1500
           });
+          setAmmount("");
+          setName("");
+          setAccount("");
+          setType("")
           console.log("Data posted successfully===>>>>", data);
-          navigate("/dashboards/default")
+          // navigate("/dashboards/default")
         } else {
           Swal.fire({
             icon: 'error',
@@ -162,10 +164,10 @@ function AddAccount() {
           {/* <SoftBox component="form" role="form"> */}
           <form onSubmit={handleSubmit}>
             <SoftBox mb={2}>
-              <SoftInput type="text" value={account} placeholder="AccountHolderName" onChange={(event)=>setName(event.target.value)} />
+              <SoftInput type="text" value={account} placeholder="AccountHolderName" onChange={(event)=>setAccount(event.target.value)} />
             </SoftBox>
             <SoftBox mb={2}>
-              <SoftInput type="text" value={name} placeholder="AccountNumber" onChange={(event)=> setAccount(event.target.value) } />
+              <SoftInput type="text" value={name} placeholder="AccountNumber" onChange={(event)=> setName(event.target.value) } />
             </SoftBox>
             <SoftBox mb={2}>
               <SoftInput type="text" value={amount} placeholder="Balance" onChange={(event)=> setAmmount(event.target.value)}/>

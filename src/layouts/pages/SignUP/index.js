@@ -86,10 +86,12 @@ function Basic() {
       try {
         console.log("hiiii------------>>>", data);
         const resp = await login(data);
+        console.log("vggvhgvgvh",resp.data);
         const res = resp.data;
         if (resp.status == 200) {
           const token = res.token;
           // Save token to local storage
+          console.log("token",token);
           localStorage.setItem('token', token);
           Swal.fire({
             icon: 'success',
@@ -99,7 +101,7 @@ function Basic() {
             timer: 1500
           });
           console.log("Data posted successfully===>>>>", data);
-          navigate("/dashboards/default")
+          navigate("/Uploader/banner")
         } else {
           Swal.fire({
             icon: 'error',
@@ -150,7 +152,7 @@ function Basic() {
       description="Use these awesome forms to login or create new account in your project for free."
       image={curved6}
     >
-    <ToastContainer/>
+    
       <Card>
         <SoftBox pt={2} pb={3} px={3}>
         <SoftTypography>Login</SoftTypography>
