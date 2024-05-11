@@ -106,7 +106,7 @@ function Banner() {
           setEvent("");
           setOffers("");
           setAppName("");
-          duration("");
+          setDuration("");
           setSelectedFile(null);
           console.log("Data posted successfully===>>>>");
           // navigate("/dashboards/default")

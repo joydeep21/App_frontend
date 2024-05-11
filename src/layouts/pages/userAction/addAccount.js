@@ -95,6 +95,7 @@ function AddAccount() {
       try {
         console.log("hiiii------------>>>", data);
         const resp = await addAccount(data);
+        console.log("errors",resp);
         const res = resp.data;
         if (resp.status == 200) {
          
@@ -120,6 +121,8 @@ function AddAccount() {
           });
         }
       } catch (err) {
+        console.log("errors",err);
+
         Swal.fire({
           icon: 'error',
           title: ' failed!',
